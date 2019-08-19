@@ -4,6 +4,7 @@ namespace App\Admin\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Models\ServerFood;
+use App\Traits\Food;
 use Encore\Admin\Controllers\HasResourceActions;
 use Encore\Admin\Form;
 use Encore\Admin\Grid;
@@ -12,6 +13,7 @@ use Encore\Admin\Layout\Content;
 class ServerController extends Controller
 {
     use HasResourceActions;
+    use Food;
 
     public function index(Content $content)
     {
@@ -53,7 +55,7 @@ class ServerController extends Controller
         $form->display('id', 'ID');
 
         $form->date('server_time', trans('food.server_time'))->rules('required');
-        $form->checkbox('food_id',trans('food.name'))->options('/api/food/list');
+        $form->checkbox('food_id',trans('food.name'))->options($this->foodList());
         $form->number('num', trans('food.num'))->rules('required');
         $form->select('server_type', trans('food.server_type'))->options([1 => '午餐', 2 => '晚餐'])->rules('required');
 

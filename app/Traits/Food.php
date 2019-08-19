@@ -13,7 +13,6 @@ trait Food
     public function foodList()
     {
         return $this->model
-            ->select('id','name')
-            ->get();
+            ->pluck('name','id');
     }
 }
