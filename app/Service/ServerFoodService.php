@@ -28,9 +28,9 @@ class ServerFoodService extends Service
         }
         try{
             ServerFood::insert($saveData);
-            return self::MessageBagMsg(true,'操作成功');
+            return self::statusSet(true,'操作成功');
         }catch (\Exception $e){
-            return self::MessageBagMsg(false,'操作失败');
+            return self::statusSet(false,'操作失败');
         }
     }
 
@@ -49,7 +49,7 @@ class ServerFoodService extends Service
         }catch (\Exception $e){
             dd($e->getMessage());
             DB::rollBack();
-            return self::MessageBagMsg(false,'操作失败');
+            return self::statusSet(false,'操作失败');
         }
 
     }

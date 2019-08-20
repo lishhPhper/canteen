@@ -9,6 +9,8 @@
 namespace App\Service;
 
 
+use Illuminate\Support\MessageBag;
+
 class Service
 {
     /**
@@ -28,17 +30,28 @@ class Service
     }
 
     /**
-     * 返回MessageBag消息
+     * 返回status消息
      * @param bool $status
      * @param string $msg
      * @return array
      */
-    public static function MessageBagMsg(bool $status, string $msg = ''): array
+    public static function statusSet(bool $status, string $msg = ''): array
     {
         return [
             'status' => $status,
             'msg' => $msg
         ];
+    }
+
+    public static function MessageBagReturn($message, $uri)
+    {
+        $title = !$message['status'] ? '失败' : '成功';
+        $success = $error = new MessageBag([
+            'title'   => $title,
+            'message' => $message['msg'],
+        ]);
+        if(!$message['status']) return redirect($uri)->with(compact('error'));
+        return redirect($uri)->with(compact('success'));
     }
 
     /**

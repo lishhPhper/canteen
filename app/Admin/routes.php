@@ -23,4 +23,7 @@ Route::group([
 
     // 供餐管理
     $router->resource('server','ServerController');
+
+    // 系统设置
+    $router->resource('setting','SettingController');
 });
