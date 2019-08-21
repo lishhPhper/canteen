@@ -15,4 +15,5 @@ trait Food
         return $this->model
             ->pluck('name','id');
     }
+
 }

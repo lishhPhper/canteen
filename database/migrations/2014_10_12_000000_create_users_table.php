@@ -21,7 +21,7 @@ class CreateUsersTable extends Migration
             $table->string('avatar')->nullable()->comment('头像');
             $table->string('department')->nullable()->comment('部门');
             $table->tinyInteger('type')->comment('属性1=普通用户2=白名单');
-            $table->string('face_id')->unique()->comment('人脸ID');
+            $table->string('face_id')->nullable()->comment('人脸ID');
 
             $table->rememberToken();
             $table->timestamps();

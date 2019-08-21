@@ -13,6 +13,12 @@ use Illuminate\Support\MessageBag;
 
 class Service
 {
+    private $code = [
+        '1001' => '未登入或已失效',
+        '1002' => '未获得权限',
+
+        '5000' => '服务异常',
+    ];
     /**
      * 返回数组
      * @param bool $result

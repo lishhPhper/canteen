@@ -2,14 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Service\FoodService;
 use Illuminate\Http\Request;
-use App\Traits\Food;
 
 class FoodController extends Controller
 {
-    use Food;
-    public function getFoodList()
+    public function serverFood()
     {
-        return $this->foodList();
+        $result['food_list'] = FoodService::getFoodList();
+        $result['is_eat'] = FoodService::getIsEat();
+        return $this->success('',$result);
     }
 }

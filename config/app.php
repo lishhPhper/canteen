@@ -178,6 +178,7 @@ return [
         // 数据库数据导出seeder
         Orangehill\Iseed\IseedServiceProvider::class,
 
+        Tymon\JWTAuth\Providers\LaravelServiceProvider::class,
     ],
 
     /*
