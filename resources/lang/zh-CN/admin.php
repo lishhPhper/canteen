@@ -17,6 +17,8 @@ return [
     'remember_me'           => '记住我',
     'user_setting'          => '用户设置',
     'avatar'                => '头像',
+    'appointment'           => '预约管理',
+    'special'               => '特殊预约管理',
     'list'                  => '列表',
     'new'                   => '新增',
     'create'                => '创建',

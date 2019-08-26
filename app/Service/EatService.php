@@ -163,10 +163,15 @@ class EatService extends Service
     {
         $offset = ($page - 1) * $pagesize;
         $total = EvaluationLog::count();
-        $list = EvaluationLog::select('id','point','evaluation','created_at',DB::Raw("unix_timestamp(created_at) as create_time"))
-            ->with(['eat' => function ($query){
-                $query->select('id','appoint_date','eat_type','start_time','end_time','appoint_type','evaluation_id',DB::Raw("unix_timestamp(appoint_date) as appoint_time"));
-            }])
+        $list = EvaluationLog::select('id','point','evaluation','created_at','user_id',DB::Raw("unix_timestamp(created_at) as create_time"))
+            ->with([
+                'eat' => function ($query){
+                    $query->select('id','appoint_date','eat_type','start_time','end_time','appoint_type','evaluation_id',DB::Raw("unix_timestamp(appoint_date) as appoint_time"));
+            },
+                'user' => function ($query){
+                    $query->select('id','name','avatar');
+                }
+                ])
             ->offset($offset)
             ->limit($pagesize)
             ->orderBy('created_at','desc')

@@ -26,4 +26,10 @@ Route::group([
 
     // 系统设置
     $router->resource('setting','SettingController');
+
+    // 预约管理
+    $router->resource('appointment','AppointmentController');
+
+    // 特殊预约管理
+    $router->resource('special','SpecialController');
 });
