@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use App\User;
 use Closure;
 
 class CheckLogin
@@ -15,10 +16,15 @@ class CheckLogin
      */
     public function handle($request, Closure $next)
     {
-        $user = auth()->user();
+        $token = $request->header('token') ? $request->header('token') : $request->input('token');
+        if(empty($token)){
+            return response()->json(['code' => 1001, 'msg'  => '未登录或已失效', 'data' => []]);
+        }
+        $user = User::where('remember_token',$token)->first();
         if (!$user){
             return response()->json(['code' => 1001, 'msg'  => '未登录或已失效', 'data' => []]);
         }
+        $request->user = $user;
         return $next($request);
     }
 }

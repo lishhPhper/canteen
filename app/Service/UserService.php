@@ -11,16 +11,14 @@ class UserService extends Service
         if(empty($params['phone']) || empty($params['password'])) {
             return self::resultSet(false, '请输入手机和密码');
         }
-        // 已登入
-        $user = auth()->user();
-        if($user){
-            // 如有头像信息 进行完善
-            if(!empty($params['avatar'])){
-                $user->avatar = $params['avatar'];
-                $user->save();
-            }
-            return self::resultSet(true, '已登录',$user);
-        }
+//        if($user){
+//            // 如有头像信息 进行完善
+//            if(!empty($params['avatar'])){
+//                $user->avatar = $params['avatar'];
+//                $user->save();
+//            }
+//            return self::resultSet(true, '已登录',$user);
+//        }
 
         $user = User::where('phone',$params['phone'])
             ->first();
@@ -30,8 +28,8 @@ class UserService extends Service
         if (!Hash::check($params['password'], $user->password)) {
             return self::resultSet(false, '密码错误');
         };
-        if(!empty($params['avatar'])){
-            $user->avatar = $params['avatar'];
+        if(!empty($params['avatarUrl'])){
+            $user->avatar = $params['avatarUrl'];
             $user->save();
         }
         return self::resultSet(true, '登录成功',$user);

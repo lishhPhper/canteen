@@ -17,6 +17,8 @@ class Service
         '1001' => '未登入或已失效',
         '1002' => '未获得权限',
 
+        '2001' => '未查到预约记录',
+
         '5000' => '服务异常',
     ];
     /**
@@ -26,7 +28,7 @@ class Service
      * @param mixed $data
      * @return array
      */
-    public static function resultSet(bool $result, string $msg = '', $data = []): array
+    public static function resultSet($result, string $msg = '', $data = []): array
     {
         return [
             'result' => $result,
@@ -67,5 +69,10 @@ class Service
     protected function now()
     {
         return Carbon::now();
+    }
+
+    public function timeFormat($time)
+    {
+        return date('H:i',strtotime($time));
     }
 }
