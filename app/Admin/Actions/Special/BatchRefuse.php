@@ -16,7 +16,7 @@ class BatchRefuse extends BatchAction
             $model->save();
         }
 
-        return $this->response()->success('Success message...')->refresh();
+        return $this->response()->success('审核成功')->refresh();
     }
 
 }

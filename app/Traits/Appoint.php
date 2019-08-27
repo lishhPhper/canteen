@@ -66,7 +66,7 @@ trait Appoint
             })
             ->count();
         // 今天有没有比现在时间早的违约记录
-        $now_num =  EatLog::where('user_id',$user_id)
+        $now_data =  EatLog::where('user_id',$user_id)
             ->where('appoint_date',$date)
             ->where('default',1)
             ->where('status',1)
@@ -83,7 +83,27 @@ trait Appoint
                             ->where('is_face',0);
                     });
             })
-            ->count();
+            ->get();
+        $now_num = 0;
+        if(!empty($now_data)){
+            // 最大预约人，批次
+            $keys  = ['max_reservation_num','dining_lot','first_lunch_time','first_night_time','eat_interval'];
+            $configs = Setting::getParam($keys);
+            $time = date('H:i:s');
+            $lot = $configs['dining_lot'] * $configs['eat_interval'] * 60;
+            $last_lunch_end_time = date("H:i:s",strtotime($configs['first_lunch_time']) + $lot);
+            $last_night_end_time = date("H:i:s",strtotime($configs['first_night_time']) + $lot);
+            foreach ($now_data as $item){
+                // 午餐
+                if($item['eat_type'] == 1 && $time > $last_lunch_end_time){
+                    $now_num += 1;
+                }
+                // 晚餐
+                if($item['eat_type'] == 2 && $time > $last_night_end_time){
+                    $now_num += 1;
+                }
+            }
+        }
         return $ahead_num + $now_num;
     }
 

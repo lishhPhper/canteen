@@ -19,6 +19,7 @@ return [
     'avatar'                => '头像',
     'appointment'           => '预约管理',
     'special'               => '特殊预约管理',
+    'default'               => '违约管理',
     'list'                  => '列表',
     'new'                   => '新增',
     'create'                => '创建',

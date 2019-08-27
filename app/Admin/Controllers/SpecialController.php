@@ -63,20 +63,13 @@ class SpecialController extends Controller
 
             // 去掉默认的id过滤器
             $filter->disableIdFilter();
-            $filter->column(1/3, function ($filter) {
+            $filter->column(1/2, function ($filter) {
                 // 在这里添加字段过滤器
                 $filter->like('user.name', trans('admin.name'));
             });
-            $filter->column(1/3, function ($filter) {
+            $filter->column(1/2, function ($filter) {
                 // 在这里添加字段过滤器
                 $filter->equal('user.phone', trans('admin.phone'));
-            });
-            $filter->column(1/3, function ($filter) {
-                // 在这里添加字段过滤器
-                $filter->equal('eat_type', trans('food.server_type'))->select([
-                    1 => '午餐',
-                    2 => '晚餐'
-                ]);
             });
         });
 

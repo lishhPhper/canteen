@@ -85,6 +85,7 @@ class ServerController extends Controller
     public function grid()
     {
         $grid = new Grid(new ServerFood());
+        $grid->model()->orderBy('server_time','desc');
         $grid->disableRowSelector();
         $grid->column('id', 'ID')->sortable();
         $grid->food()->name(trans('food.name'));

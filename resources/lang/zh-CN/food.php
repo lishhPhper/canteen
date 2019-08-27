@@ -7,4 +7,6 @@ return [
     'server_type'         => '餐品类型',
     'appoint_date'        => '预约日期',
     'desc'                => '备注',
+    'point'               => '评分',
+    'evaluation'          => '评价',
 ];

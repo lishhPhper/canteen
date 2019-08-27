@@ -32,4 +32,10 @@ Route::group([
 
     // 特殊预约管理
     $router->resource('special','SpecialController');
+
+    // 违约管理
+    $router->resource('default','DefaultController');
+
+    // 评价管理
+    $router->resource('evaluation','EvaluationController');
 });
