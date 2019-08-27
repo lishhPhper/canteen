@@ -36,10 +36,10 @@ class AdminMenuTableSeeder extends Seeder
                 'order' => 2,
                 'title' => '系统管理',
                 'icon' => 'fa-tasks',
-                'uri' => '',
-                'permission' => NULL,
+                'uri' => NULL,
+                'permission' => 'auth.management',
                 'created_at' => NULL,
-                'updated_at' => NULL,
+                'updated_at' => '2019-08-27 10:55:24',
             ),
             2 => 
             array (
@@ -109,9 +109,9 @@ class AdminMenuTableSeeder extends Seeder
                 'title' => '功能',
                 'icon' => 'fa-bars',
                 'uri' => NULL,
-                'permission' => NULL,
+                'permission' => 'user',
                 'created_at' => '2019-08-17 18:17:54',
-                'updated_at' => '2019-08-17 18:17:54',
+                'updated_at' => '2019-08-27 10:56:48',
             ),
             8 => 
             array (
@@ -145,9 +145,9 @@ class AdminMenuTableSeeder extends Seeder
                 'title' => '预约管理',
                 'icon' => 'fa-clock-o',
                 'uri' => 'appointment',
-                'permission' => NULL,
+                'permission' => 'appointment',
                 'created_at' => '2019-08-17 18:18:48',
-                'updated_at' => '2019-08-17 18:18:48',
+                'updated_at' => '2019-08-27 10:56:57',
             ),
             11 => 
             array (
@@ -157,9 +157,9 @@ class AdminMenuTableSeeder extends Seeder
                 'title' => '评价管理',
                 'icon' => 'fa-bell-o',
                 'uri' => 'evaluation',
-                'permission' => NULL,
+                'permission' => 'evaluation',
                 'created_at' => '2019-08-17 18:19:14',
-                'updated_at' => '2019-08-17 18:19:14',
+                'updated_at' => '2019-08-27 10:57:06',
             ),
             12 => 
             array (
@@ -169,9 +169,9 @@ class AdminMenuTableSeeder extends Seeder
                 'title' => '特殊预约管理',
                 'icon' => 'fa-bell',
                 'uri' => 'special',
-                'permission' => NULL,
+                'permission' => 'special',
                 'created_at' => '2019-08-17 18:20:26',
-                'updated_at' => '2019-08-17 18:20:26',
+                'updated_at' => '2019-08-27 10:57:15',
             ),
             13 => 
             array (
@@ -181,9 +181,9 @@ class AdminMenuTableSeeder extends Seeder
                 'title' => '菜品管理',
                 'icon' => 'fa-bars',
                 'uri' => 'food',
-                'permission' => NULL,
+                'permission' => 'food',
                 'created_at' => '2019-08-17 18:20:55',
-                'updated_at' => '2019-08-17 18:20:55',
+                'updated_at' => '2019-08-27 10:57:24',
             ),
             14 => 
             array (
@@ -193,9 +193,9 @@ class AdminMenuTableSeeder extends Seeder
                 'title' => '供餐管理',
                 'icon' => 'fa-bars',
                 'uri' => 'server',
-                'permission' => NULL,
+                'permission' => 'server',
                 'created_at' => '2019-08-17 18:21:29',
-                'updated_at' => '2019-08-17 18:21:29',
+                'updated_at' => '2019-08-27 10:57:32',
             ),
             15 => 
             array (
@@ -205,9 +205,9 @@ class AdminMenuTableSeeder extends Seeder
                 'title' => '违约管理',
                 'icon' => 'fa-bars',
                 'uri' => 'default',
-                'permission' => NULL,
+                'permission' => 'default',
                 'created_at' => '2019-08-17 18:22:06',
-                'updated_at' => '2019-08-17 18:22:06',
+                'updated_at' => '2019-08-27 10:57:41',
             ),
             16 => 
             array (
@@ -217,9 +217,9 @@ class AdminMenuTableSeeder extends Seeder
                 'title' => '用户管理',
                 'icon' => 'fa-bars',
                 'uri' => 'userInfo',
-                'permission' => NULL,
+                'permission' => 'userInfo',
                 'created_at' => '2019-08-17 18:22:21',
-                'updated_at' => '2019-08-17 18:22:21',
+                'updated_at' => '2019-08-27 10:57:48',
             ),
             17 => 
             array (
@@ -228,10 +228,34 @@ class AdminMenuTableSeeder extends Seeder
                 'order' => 0,
                 'title' => '系统设置',
                 'icon' => 'fa-gear',
-                'uri' => 'setting',
-                'permission' => NULL,
+                'uri' => 'setting/create',
+                'permission' => 'auth.setting',
                 'created_at' => '2019-08-17 18:23:16',
-                'updated_at' => '2019-08-17 18:23:16',
+                'updated_at' => '2019-08-27 10:57:59',
+            ),
+            18 => 
+            array (
+                'id' => 19,
+                'parent_id' => 0,
+                'order' => 8,
+                'title' => '异常记录',
+                'icon' => 'fa-bug',
+                'uri' => 'exceptions',
+                'permission' => 'ext.reporter',
+                'created_at' => '2019-08-20 15:20:39',
+                'updated_at' => '2019-08-27 10:55:39',
+            ),
+            19 => 
+            array (
+                'id' => 20,
+                'parent_id' => 0,
+                'order' => 9,
+                'title' => 'ENV参数设置',
+                'icon' => 'fa-gears',
+                'uri' => 'env-manager',
+                'permission' => 'env-manager',
+                'created_at' => '2019-08-20 15:22:46',
+                'updated_at' => '2019-08-27 10:56:27',
             ),
         ));
         
