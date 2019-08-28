@@ -52,25 +52,40 @@ class AppointService extends Service
         if($reservation_num >= $max_num['max_reservation_num']){
             return self::resultSet(0,'预约人数已满');
         }
+
+        $date = date('Y-m-d',strtotime("+1 day"));
+        $normal_cancel = AppointLog::where('user_id',$user_id)
+            ->where('appoint_date',$date)
+            ->where('eat_type',$reservation_type)
+            ->where('status',0)
+            ->where('appoint_type',1)
+            ->first();
         try{
             DB::beginTransaction();
-            // 保存预约记录
             $AppointLog = new AppointLog();
-            $AppointLog->user_id = $user_id;
-            $AppointLog->appoint_date = date('Y-m-d',strtotime("+1 day"));
-            $AppointLog->eat_type = $reservation_type;
-            $AppointLog->appoint_type = 1;
-            $AppointLog->status = 1;
-            $AppointLog->save();
+            if(!$normal_cancel){
+                // 保存预约记录
+                $AppointLog->user_id = $user_id;
+                $AppointLog->appoint_date = date('Y-m-d',strtotime("+1 day"));
+                $AppointLog->eat_type = $reservation_type;
+                $AppointLog->appoint_type = 1;
+                $AppointLog->status = 1;
+                $AppointLog->save();
 
-            // 提前生成就餐记录
-            $EatLog = new EatLog();
-            $EatLog->user_id = $user_id;
-            $EatLog->appoint_id = $AppointLog->id;
-            $EatLog->appoint_date = date('Y-m-d',strtotime("+1 day"));
-            $EatLog->eat_type = $reservation_type;
-            $EatLog->appoint_type = 1;
-            $EatLog->save();
+                // 提前生成就餐记录
+                $EatLog = new EatLog();
+                $EatLog->user_id = $user_id;
+                $EatLog->appoint_id = $AppointLog->id;
+                $EatLog->appoint_date = date('Y-m-d',strtotime("+1 day"));
+                $EatLog->eat_type = $reservation_type;
+                $EatLog->appoint_type = 1;
+                $EatLog->save();
+            }else{
+                AppointLog::where('id',$normal_cancel->id)
+                    ->update(['status' => 1]);
+                EatLog::where('appoint_id',$normal_cancel->id)
+                    ->update(['status' => 1]);
+            }
 
             DB::commit();
             $data = $this->getReservationSuccess($reservation_type);
@@ -477,7 +492,7 @@ class AppointService extends Service
 
     public function getNormalTotal($eat_type, $page, $pagesize)
     {
-        $date = date('Y-m-d');
+        $date = date('Y-m-d',strtotime("+1 day"));
         $offset = ($page - 1) * $pagesize;
         $total = AppointLog::where('appoint_type',1)
             ->where('appoint_date', $date)
