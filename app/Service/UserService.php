@@ -23,7 +23,7 @@ class UserService extends Service
         $user = User::where('phone',$params['phone'])
             ->first();
 
-        if(!$user) return self::resultSet(false, '未录入');
+        if(!$user) return self::resultSet(false, '用户信息不存在');
 
         if (!Hash::check($params['password'], $user->password)) {
             return self::resultSet(false, '密码错误');
