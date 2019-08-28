@@ -80,16 +80,18 @@ class AppointService extends Service
                 $EatLog->eat_type = $reservation_type;
                 $EatLog->appoint_type = 1;
                 $EatLog->save();
+                $appoint_id = $AppointLog->id;
             }else{
-                AppointLog::where('id',$normal_cancel->id)
+                $appoint_id = $normal_cancel->id;
+                AppointLog::where('id',$appoint_id)
                     ->update(['status' => 1]);
-                EatLog::where('appoint_id',$normal_cancel->id)
+                EatLog::where('appoint_id',$appoint_id)
                     ->update(['status' => 1]);
             }
 
             DB::commit();
             $data = $this->getReservationSuccess($reservation_type);
-            $data['appoint_id'] = $AppointLog->id;
+            $data['appoint_id'] = $appoint_id;
             // 返回就餐时间段、最晚取消预约时间
             return self::resultSet(1,'预约成功',$data);
         }catch (\Exception $e){
