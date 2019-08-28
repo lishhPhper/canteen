@@ -18,12 +18,8 @@ class UserController extends Controller
         }
         $token = $this->uuid();
         TokenService::set($token, $user['data']);
-//        if (! $token = auth()->login($user['data'])) {
-//            return $this->failure('登录失败',[],1001);
-//        }
-//        // TODO 身份识别  手机号码？？？？
-//        $token = $this->respondWithToken($token);
-        $is_admin = 0;
+
+        $is_admin = $user['data']['type'] == 3 ? 1 : 0;
 
         return $this->success('登录成功',['user' => $user['data'], 'token' => $token, 'is_admin' => $is_admin]);
     }

@@ -91,10 +91,15 @@ class UserInfoController extends Controller
         $form->display('id', 'ID');
 
         $form->text('name', trans('admin.name'))->rules('required');
-        $form->mobile('phone', trans('admin.phone'))->options(['mask' => '99999999999'])->rules('required');
-        $form->password('password', trans('admin.password'))->rules('required | min:6');
+        $form->mobile('phone', trans('admin.phone'))->options(['mask' => '99999999999'])->rules('required|numeric',[
+            'numeric'   => '必须是数字',
+        ]);
+        $form->password('password', trans('admin.password'))->rules('required | min:6 | alpha_num',[
+            'min'   => '最少6位长度',
+            'alpha_dash'   => '必须是完全是字母、数字',
+        ]);
         $form->text('department', trans('admin.department'))->rules('required');
-        $form->select('type', '选择用户类型')->options([1 => '普通员工', 2 => '白名单'])->rules('required');
+        $form->select('type', '选择用户类型')->options([1 => '普通员工', 2 => '白名单', 3 => '管理员'])->rules('required');
 
         $form->display('created_at', trans('admin.created_at'));
         $form->display('updated_at', trans('admin.updated_at'));

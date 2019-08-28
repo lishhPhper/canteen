@@ -33,13 +33,18 @@ class AppointService extends Service
         }
         // 现在属于哪个预约类型
         $reservation_type = $this->getReservationType();
+//        dd($reservation_type);
         if($reservation_type != $type){
             return self::resultSet(0,'不在预约时间范围内');
         }
         // 是否已预约（包括特殊预约）
-        $reserved = $this->reserved($user_id, $reservation_type);
-        if($reserved > 0){
-            return self::resultSet(0,'正在预约中或已预约');
+        $nomal_reserved = $this->reserved($user_id, $reservation_type,1);
+        if($nomal_reserved > 0){
+            return self::resultSet(0,'您已预约');
+        }
+        $special_reserved = $this->reserved($user_id, $reservation_type,2);
+        if($special_reserved > 0){
+            return self::resultSet(0,'预约审核中');
         }
         // 已预约人数查询
         $max_num = Setting::getParam(['max_reservation_num']);
