@@ -13,6 +13,7 @@ class SettingService extends Service
         $all_key_data = Setting::select('id','key','value')
             ->get()->toArray();
         $all_keys = array_column($all_key_data,'key','id');
+        $params['max_reservation_num'] = (int)$params['max_reservation_num'];
         if($params['max_reservation_num'] <= 0){
             return self::statusSet(false,'人数需要大于0');
         }

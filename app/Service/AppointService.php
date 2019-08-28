@@ -44,7 +44,7 @@ class AppointService extends Service
         }
         $special_reserved = $this->reserved($user_id, $reservation_type,2);
         if($special_reserved > 0){
-            return self::resultSet(0,'预约审核中');
+            return self::resultSet(0,'特殊预约审核中');
         }
         // 已预约人数查询
         $max_num = Setting::getParam(['max_reservation_num']);
