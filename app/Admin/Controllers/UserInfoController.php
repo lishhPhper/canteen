@@ -64,8 +64,12 @@ class UserInfoController extends Controller
         $grid->column('type','类别')->display(function () {
             if ($this->type == 1) {
                 return '普通员工';
+            } elseif ($this->type == 2){
+                return '白名单';
+            }else{
+                return '管理员';
             }
-            return '白名单';
+
         });
         $grid->column('type_count','数量');
         $grid->column('updated_at',trans('admin.updated_at'))->display(function () {

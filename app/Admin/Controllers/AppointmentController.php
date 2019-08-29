@@ -29,7 +29,7 @@ class AppointmentController extends Controller
         $grid->disableCreateButton();
         $grid->disableRowSelector();
         $grid->disableExport();
-        $grid->disableTools();
+//        $grid->disableTools();
         $grid->column('id', 'ID')->sortable();
         $grid->user()->name(trans('admin.name'));
         $grid->user()->phone(trans('admin.phone'));
