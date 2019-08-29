@@ -61,12 +61,18 @@ class FoodController extends Controller
         $form->display('id', 'ID');
 
         $form->text('name', trans('food.name'))->rules('required');
-        $form->number('num', trans('food.num'))->rules('required');
+        $form->number('num', trans('food.num'))->rules('required|numeric|gt:0',[
+            'numeric' => '数量必须是数字',
+            'gt' => '数量必须大于0',
+        ]);
         $form->image('img_url', trans('food.img_url'))->uniqueName()->rules('required');
 
         $form->display('created_at', trans('admin.created_at'));
         $form->display('updated_at', trans('admin.updated_at'));
 
+        $form->saving(function (Form $form){
+            $form->num = (int)$form->num;
+        });
         return $form;
     }
 }

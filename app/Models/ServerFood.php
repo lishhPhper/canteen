@@ -16,7 +16,7 @@ class ServerFood extends Model
         return [
             'server_time' => 'required',
             'food_id' => 'required',
-            'food_num' => 'required|integer',
+            'food_num' => 'required|integer|gt:0',
             'server_type' => 'required|integer',
         ];
     }
@@ -28,6 +28,7 @@ class ServerFood extends Model
             'food_id.required' => '请选择菜品',
             'food_num.required' => '请填写菜品数量',
             'food_num.integer' => '请填写菜品数量',
+            'food_num.gt' => '菜品数量必须大于零',
             'server_type.required' => '请选择供餐类型',
             'server_type.integer' => '请选择供餐类型',
         ];
