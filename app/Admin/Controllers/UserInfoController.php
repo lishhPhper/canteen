@@ -99,6 +99,7 @@ class UserInfoController extends Controller
             'numeric'   => '必须是数字',
         ]);
         $form->password('password', trans('admin.password'))->rules('required | min:6 | alpha_num',[
+            'required'   => '必须填写密码',
             'min'   => '最少6位长度',
             'alpha_dash'   => '必须是完全是字母、数字',
         ]);
