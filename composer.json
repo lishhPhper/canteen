@@ -17,6 +17,7 @@
         "laravel/tinker": "^1.0",
         "nesbot/carbon": "^2.23",
         "orangehill/iseed": "^2.6",
+        "overtrue/laravel-wechat": "~5.0",
         "tymon/jwt-auth": "1.0.0-rc.4.1"
     },
     "require-dev": {

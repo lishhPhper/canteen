@@ -11,14 +11,12 @@ class UserService extends Service
         if(empty($params['phone']) || empty($params['password'])) {
             return self::resultSet(false, '请输入手机和密码');
         }
-//        if($user){
-//            // 如有头像信息 进行完善
-//            if(!empty($params['avatar'])){
-//                $user->avatar = $params['avatar'];
-//                $user->save();
-//            }
-//            return self::resultSet(true, '已登录',$user);
-//        }
+        if(empty($params['code'])){
+            return self::resultSet(false, '未获取到code');
+        }
+        $miniProgram = \EasyWeChat::miniProgram(); // 小程序
+        $session_data = $miniProgram->auth->session($params['code']);
+        $openid = !empty($session_data['openid']) ? $session_data['openid'] : '';
 
         $user = User::where('phone',$params['phone'])
             ->first();
@@ -30,8 +28,11 @@ class UserService extends Service
         };
         if(!empty($params['avatarUrl'])){
             $user->avatar = $params['avatarUrl'];
-            $user->save();
         }
+        if(!empty($openid)){
+            $user->openid = $openid;
+        }
+        $user->save();
         return self::resultSet(true, '登录成功',$user);
     }
 }
