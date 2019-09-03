@@ -9,10 +9,9 @@ class FoodController extends Controller
 {
     public function serverFood(Request $request)
     {
-        $user_id = $request->user->id;
         $FoodService = new FoodService();
         $result['food_list'] = $FoodService->getFoodList();
-        $result['is_eat'] = $FoodService->getIsEat($user_id);
+        $result['is_eat'] = $FoodService->getIsEat();
         return $this->success('',$result);
     }
 

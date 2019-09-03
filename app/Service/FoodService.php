@@ -27,11 +27,25 @@ class FoodService extends Service
         return $server_foods;
     }
 
-    public function getIsEat($user_id)
+    public function getIsEat()
     {
         // 获取现在是什么餐时段
-        $server_type = $this->getServerType();
-        return $this->normalReserved($user_id,$server_type);
+//        $server_type = $this->getServerType();
+//        return $this->normalReserved($user_id,$server_type);
+        $keys = ['first_lunch_time','eat_interval','dining_lot','first_night_time'];
+        $configs = Setting::getParam($keys);
+        $time = date('H:i:s');
+        $lot = $configs['dining_lot'] * $configs['eat_interval'] * 60;
+        $lunch_end_time = date("H:i:s",strtotime($configs['first_lunch_time']) + $lot);
+        $night_end_time = date("H:i:s",strtotime($configs['first_night_time']) + $lot);
+        $is_eat = 0;
+        if($time >= $configs['first_lunch_time'] && $time < $lunch_end_time){
+            $is_eat = 1;
+        }
+        if($time >= $configs['first_night_time'] && $time < $night_end_time){
+            $is_eat = 1;
+        }
+        return $is_eat;
     }
 
     public function toEatSet($user_id)

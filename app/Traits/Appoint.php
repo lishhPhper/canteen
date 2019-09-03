@@ -113,19 +113,20 @@ trait Appoint
      * @param $type
      * @return mixed
      */
-    public function reserved($user_id, $reservation_type)
+    public function reserved($user_id, $reservation_type, $appoint_type)
     {
         $date = date('Y-m-d',strtotime("+1 day"));
         return AppointLog::where('user_id',$user_id)
             ->where('appoint_date',$date)
             ->where('eat_type',$reservation_type)
             ->where('status',1)
-            ->where(function ($query){
-                $query->where('appoint_type',1)
-                    ->whereOr(function ($query){
-                        $query->where('appoint_type',2)
-                            ->where('verify_status',1);
-                    });
+            ->where(function ($query) use ($appoint_type) {
+                if($appoint_type == 1){
+                    $query->where('appoint_type',$appoint_type);
+                }else{
+                    $query->where('appoint_type',$appoint_type)
+                        ->where('verify_status','<',2);
+                }
             })
             ->count();
     }

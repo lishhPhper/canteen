@@ -16,8 +16,8 @@ class EvaluationController extends Controller
     public function index(Content $content)
     {
         return $content
-            ->header('预约管理')
-            ->description(trans('admin.appointment'))
+            ->header('评价管理')
+            ->description(trans('admin.evaluation'))
             ->body($this->grid()->render());
     }
 

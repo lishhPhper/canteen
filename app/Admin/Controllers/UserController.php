@@ -45,6 +45,7 @@ class UserController extends Controller
         $grid->name(trans('admin.name'));
         $grid->phone(trans('admin.phone'));
         $grid->department(trans('admin.department'));
+        $grid->type('用户类型')->using([1 => '普通员工', 2 => '白名单', 3 => '管理员']);
         $grid->column('face_id',trans('admin.face_id'))->display(function () {
             if (!empty($this->face_id)) {
                 return '已采集';

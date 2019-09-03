@@ -31,7 +31,42 @@ class AppointController extends Controller
     public function arraignment(Request $request)
     {
         $params = $request->all();
+        $form_id = $params['formid'];
+//        $form_id = '0e36344561504769a9e7fcc4912a99c4';
+//        dd($form_id);
         $user_id = $request->user->id;
+        $openid = $request->user->openid;
+        $miniProgram = \EasyWeChat::miniProgram(); // 小程序
+//        $data = $miniProgram->uniform_message->send([
+//            'touser' => 'ohIIn41I-u9IvMCkB481mn_HReOw',
+//            'weapp_template_msg' => [
+//                'template_id' => 'mtWq0Wdtln1zaikc9QDY5TuBNyKFejqsvOMAVdoihEI',
+//                'page' => 'pages/foodIndex/foodIndex',
+//                'form_id' => $form_id,
+//                'data' => [
+//                    'keyword1' => '特殊预约审核',
+//                    'keyword2' => '黎盛辉',
+//                    'keyword3' => '2019-09-04 14:00-15:00',
+//                    'keyword4' => '出差',
+//                ],
+//                'emphasis_keyword' => 'keyword1.DATA'
+//            ]
+//        ]);
+        $data = $miniProgram->template_message->send([
+            'touser' => 'ohIIn41I-u9IvMCkB481mn_HReOw',
+            'template_id' => 'mtWq0Wdtln1zaikc9QDY5TuBNyKFejqsvOMAVdoihEI',
+            'page' => 'pages/foodIndex/foodIndex',
+            'form_id' => $form_id,
+            'data' => [
+                'keyword1' => '特殊预约审核',
+                'keyword2' => '黎盛辉',
+                'keyword3' => '2019-09-04 14:00-15:00',
+                'keyword4' => '出差',
+            ],
+            'emphasis_keyword' => 'keyword1.DATA'
+        ]);
+//        $data = $miniProgram->template_message->getTemplates(0,10);
+        dd($data);
         $AppointService = new AppointService();
         $result = $AppointService->arraignmentSpecial($user_id, $params);
         return $this->success($result['msg'],$result['data'],$result['result']);

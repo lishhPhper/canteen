@@ -25,7 +25,7 @@ class IsAdmin
             return response()->json(['code' => 1001, 'msg'  => '未登录或已失效', 'data' => []]);
         }
         // TODO 手机号判断
-        if($user->phone != '18779174645'){
+        if($user->type != 3){
             return response()->json(['code' => 1002, 'msg'  => '权限不足', 'data' => []]);
         }
         $request->user = $user;

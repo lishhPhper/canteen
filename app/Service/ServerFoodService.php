@@ -12,7 +12,10 @@ class ServerFoodService extends Service
     {
         $validate = Validator::make($params, ServerFood::storerule(), ServerFood::storeMsg());
         if ($validate->fails()) {
-            throw new ServiceException($validate->errors()->first());
+            return self::statusSet(false,$validate->errors()->first());
+        }
+        if(empty($params['food_id'])){
+            return self::statusSet(false,'请选择菜品');
         }
         foreach ($params['food_id'] as $food_id){
             if(!empty($food_id)){

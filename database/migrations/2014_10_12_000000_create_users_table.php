@@ -20,8 +20,9 @@ class CreateUsersTable extends Migration
             $table->string('name')->comment('姓名');
             $table->string('avatar')->nullable()->comment('头像');
             $table->string('department')->nullable()->comment('部门');
-            $table->tinyInteger('type')->comment('属性1=普通用户2=白名单');
+            $table->tinyInteger('type')->comment('属性1=普通用户2=白名单3=管理员');
             $table->string('face_id')->nullable()->comment('人脸ID');
+            $table->string('employ_id')->nullable()->comment('工号ID');
 
             $table->rememberToken();
             $table->timestamps();

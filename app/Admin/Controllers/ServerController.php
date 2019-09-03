@@ -124,7 +124,7 @@ class ServerController extends Controller
         $grid->actions(function (Grid\Displayers\Actions $actions) {
             $actions->disableView();
             $server_info = ServerFood::findOrFail($actions->getKey());
-            if ($server_info->server_time != date('Y-m-d',strtotime("+1 day"))) {
+            if ($server_info->server_time != date('Y-m-d')) {
                 $actions->disableEdit();
             }
         });

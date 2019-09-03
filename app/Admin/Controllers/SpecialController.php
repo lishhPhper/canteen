@@ -50,6 +50,7 @@ class SpecialController extends Controller
         $grid->column('appoint_time','预约时间')->display(function () {
             return $this->appoint_date . "<br/>" . substr($this->start_time,0,5). '-' . substr($this->end_time,0,5);
         });
+        $grid->verify_status(trans('food.verify_status'))->using(['0' => '未审核', '1' => '审核通过', '2' => '拒绝通过']);
         $grid->disableActions();
 
         $grid->tools(function ($tools) {
