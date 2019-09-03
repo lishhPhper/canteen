@@ -26,10 +26,10 @@ class UserService extends Service
         if (!Hash::check($params['password'], $user->password)) {
             return self::resultSet(false, '密码错误');
         };
-        if(!empty($params['avatarUrl'])){
+        if(empty($user->avatar) && !empty($params['avatarUrl'])){
             $user->avatar = $params['avatarUrl'];
         }
-        if(!empty($openid)){
+        if(empty($user->openid) && !empty($openid)){
             $user->openid = $openid;
         }
         $user->save();
